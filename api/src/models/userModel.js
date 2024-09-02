@@ -1,6 +1,5 @@
-// models/userModel.js
 import { DataTypes } from 'sequelize';
-import sequelize from '../database/index.js';  // Asegúrate de importar tu instancia de Sequelize
+import sequelize from '../database/index.js';  
 
 const User = sequelize.define('User', {
   id: {
@@ -14,6 +13,14 @@ const User = sequelize.define('User', {
     unique: true,
   },
   password: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+  role: {
+    type: DataTypes.STRING(32),
+    allowNull: false,
+  },
+  name: {
     type: DataTypes.STRING(255),
     allowNull: false,
   },

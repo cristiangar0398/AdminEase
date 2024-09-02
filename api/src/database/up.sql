@@ -1,30 +1,19 @@
-DROP TABLE IF EXISTS user_roles;
-DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS employees;
-DROP TABLE IF EXISTS requests;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
   id VARCHAR(32) PRIMARY KEY,
   password VARCHAR(255) NOT NULL,
   document VARCHAR(32) NOT NULL UNIQUE,
+  name VARCHAR(255) NOT NULL,
+  role VARCHAR(32) NOT NULL, 
   created_at TIMESTAMP NOT NULL DEFAULT NOW()
-);
-
-CREATE TABLE roles (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(32) UNIQUE NOT NULL
-);
-
-CREATE TABLE user_roles (
-  user_id VARCHAR(32) REFERENCES users(id),
-  role_id INTEGER REFERENCES roles(id),
-  PRIMARY KEY (user_id, role_id)
 );
 
 CREATE TABLE employees (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  position VARCHAR(255),
+  user_id VARCHAR(32) REFERENCES users(id) ON DELETE CASCADE,
+  salary DECIMAL(10, 2) NOT NULL,
+  description TEXT,
   created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );

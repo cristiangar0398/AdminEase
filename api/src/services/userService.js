@@ -1,12 +1,12 @@
-// services/userService.js
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import User from '../models/userModel.js';
+import Employee from "../models/employeeModel.js";
 
 dotenv.config();
 
 class UserService {
-    async createUser(document, password, userID) {
+    async createUser(document, password, userID , role , name) {
         try {
 
             const hashCost = parseInt(process.env.HASH_COST, 10);
@@ -24,10 +24,18 @@ class UserService {
             const user = await User.create({
                 id: userID,
                 document,
+                role,
+                name,
                 password: hashedPassword,
             });
 
-            return { status: 201, user };
+            const employee = await Employee.create({
+                user_id: user.id,
+                salary: 0, 
+                description: "Pendiente de actualización",
+            });
+    
+            return { status: 201, user, employee };
 
         } catch (error) {
             console.error("Error creating user:", error);
@@ -45,7 +53,7 @@ class UserService {
             const isPasswordValid = await bcrypt.compare(password, user.password);
 
             if (isPasswordValid) {
-                return { status: 200, message: "Validation successful" };
+                return { status: 200, message: "Validation successful" , user  };
             } else {
                 return { status: 401, message: "Invalid document or password" };
             }
