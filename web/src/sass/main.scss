@@ -1,6 +1,7 @@
 @use './components/successful';
 @use './components/login';
 @use './components/dashboard';
+@use './components/modal';
 
 body {
     position: relative;

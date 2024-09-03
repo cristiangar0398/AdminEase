@@ -11,6 +11,27 @@
     box-shadow: 5px 10px 30px $shadow-color;
     border-radius: 20px;
 
+    .createButton {
+        position: relative;
+        left: 90%;
+        padding: 10px;
+        height: 40px;
+        justify-content: center;
+        display: block;
+        color: $label-color;
+        background: $button-background;
+        font-size: 1em;
+        font-weight: bold;
+        border: none;
+        border-radius: 20px;
+        transition: .2s ease-in;
+        cursor: pointer;
+
+        &:hover {
+            background: $button-hover-background-2;
+        }
+    }
+
     .logoutButton {
         position: absolute;
         top: 3%;

@@ -39,15 +39,15 @@ export default class AdminController {
 
     async updateEmployee(req, res) {
         try {
-            const { document } = req.body;
+            const { user_id } = req.body;
             const { salary, description } = req.body;
 
-            if (!document) {
+            if (!user_id) {
                 return res.status(400).json({ error: 'Invalid request payload' });
             }
 
-            const user = await EmployeeService.getEmployeeByDocument(document);
-            const result = await EmployeeService.updateEmployee(user.id, { salary, description });
+            //const user = await EmployeeService.getEmployeeByDocument(document);
+            const result = await EmployeeService.updateEmployee(user_id , { salary, description });
 
             if (result) {
                 return res.status(200).json({ message: 'Employee updated successfully' });

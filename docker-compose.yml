@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  db:
+    build:
+      context: ./api/src/database
+      dockerfile: Dockerfile
+    container_name: psql_container
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: backend_container
+    environment:
+      PORT: 5050
+      DATABASE_URL: postgres://postgres:postgres@psql_container:5432/postgres?sslmode=disable
+    ports:
+      - "5050:5050"
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: frontend_container
+    ports:
+      - "3000:3000"
+
+volumes:
+  db_data:

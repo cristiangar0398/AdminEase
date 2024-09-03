@@ -11,7 +11,7 @@ const handleErrors = async (response) => {
 
 export const createUser = async (userData, token) => {
     try {
-        const response = await fetch('http://localhost:5050/admin/createuser', {
+        const response = await fetch('http://localhost:5050/api/v1/admin/createuser', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ export const createUser = async (userData, token) => {
 
 export const updateEmployee = async (employeeData, token) => {
     try {
-        const response = await fetch('http://localhost:5050/admin/employee', {
+        const response = await fetch('http://localhost:5050/api/v1/admin/employee', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

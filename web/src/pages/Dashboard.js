@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getEmployeeInfo, getAllEmployees , deleteEmployee } from '../services/api';
+import { getEmployeeInfo, getAllEmployees, deleteEmployee } from '../services/api';
 import useRedirect from '../hooks/useRedirect';
+import UserUpdate from '../components/userUpdate'
+import CreateUser from '../components/createUser'
 
 const Dashboard = () => {
     const [isLogout, setIsLogout] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpenC, setIsModalOpenC] = useState(false);
+    const [selectedUserId, setSelectedUserId] = useState('');
     const [userInfo, setUserInfo] = useState(null);
     const [employees, setEmployees] = useState([]);
     const [userRole, setUserRole] = useState('');
@@ -15,6 +20,21 @@ const Dashboard = () => {
     const redirect = useRedirect();
     const navigate = useNavigate();
 
+    const openModal = (userId) => {
+        if(!userId){
+            setIsModalOpenC(true);
+        }else{
+            setIsModalOpen(true);
+        }
+        setSelectedUserId(userId);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedUserId('');
+    };
+    
     const fetchUserData = async () => {
         try {
 
@@ -46,7 +66,7 @@ const Dashboard = () => {
     const handleDelete = async (event) => {
         const userId = event.currentTarget.getAttribute('data-user-id');
         const token = localStorage.getItem('token');
-        await deleteEmployee(userId , token);
+        await deleteEmployee(userId, token);
         navigate(0);
     }
 
@@ -57,6 +77,7 @@ const Dashboard = () => {
     return (
         <div className='dash-container'>
             <button className='logoutButton' onClick={handleLogout}>Logout</button>
+            <button className='createButton' onClick={() => openModal()}>Crear Usuario</button>
             {error && <p>{error}</p>}
             {userRole === 'administrador' && (
                 <>
@@ -68,10 +89,10 @@ const Dashboard = () => {
                             {employees.map(employee => (
                                 <li key={employee.user_id}>
                                     <div className='infoContent'>
-                                        <p><label>User ID : </label>{employee.user_id}</p>
-                                        <p><label>Salario : </label>{employee.salary}</p>
-                                        <p><label>Descripcion: </label>{employee.description}</p>
-                                        <button id='modify' onClick={handleLogout}>Modificar</button>
+                                        <p><label>User ID : </label> {employee.user_id}</p>
+                                        <p><label>Salario : </label> {employee.salary}</p>
+                                        <p><label>Descripcion : </label> {employee.description}</p>
+                                        <button id='modify' data-user-id={employee.user_id}  onClick={() => openModal(employee.user_id)} >Modificar</button>
                                         <button id='delete' data-user-id={employee.user_id} onClick={handleDelete}>Eliminar</button>
                                     </div>
                                 </li>
@@ -91,6 +112,8 @@ const Dashboard = () => {
                     </div>
                 </>
             )}
+            <UserUpdate isOpen={isModalOpen} onClose={closeModal} userId={selectedUserId} />
+            <CreateUser isOpen={isModalOpenC} onClose={closeModal} userId={selectedUserId} />
         </div>
     );
 };
