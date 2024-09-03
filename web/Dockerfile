@@ -1,14 +1,15 @@
-FROM node:14-alpine
+FROM node:alpine
 
 WORKDIR /app
 
 COPY package*.json ./
 
 RUN npm install
-RUN npm update
 
 COPY . .
 
-EXPOSE 5050
+RUN npm run build
+
+EXPOSE 3000
 
 CMD ["npm", "start"]
