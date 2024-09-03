@@ -49,8 +49,6 @@ export default class AdminController {
             const user = await EmployeeService.getEmployeeByDocument(document);
             const result = await EmployeeService.updateEmployee(user.id, { salary, description });
 
-            console.log("====> user :" , user.id)
-
             if (result) {
                 return res.status(200).json({ message: 'Employee updated successfully' });
             } else {
@@ -64,10 +62,10 @@ export default class AdminController {
 
     async deleteEmployee(req, res) {
         try {
-            const { document } = req.body;
+            const { user_id } = req.body;
 
-            const user = await EmployeeService.getEmployeeByDocument(document);
-            const result = await EmployeeService.deleteEmployee(user.id);
+            //const user = await EmployeeService.getEmployeeByDocument(document);
+            const result = await EmployeeService.deleteEmployee(user_id);
 
             if (result) {
                 return res.status(200).json({ message: 'Employee deleted successfully' });

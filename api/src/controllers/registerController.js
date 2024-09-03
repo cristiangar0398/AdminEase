@@ -48,7 +48,13 @@ export default class registerController {
           process.env.JWT_SECRET, 
           { expiresIn: '1h' } 
         );
-        return res.status(200).json({ message: result.message , token: token });
+        return res.status(200).json({ 
+          message: result.message , 
+          token: token , 
+          role: result.user.role , 
+          name : result.user.name , 
+          document : result.user.document
+        });
       }
 
       if (result.status === 401) {
