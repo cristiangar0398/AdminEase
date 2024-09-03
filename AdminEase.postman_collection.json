@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "c2e32c08-67e6-4631-9f83-967214a746ae",
+		"name": "AdminEase",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32932794"
+	},
+	"item": [
+		{
+			"name": "SingUP",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"document\":\"102243702233\",\r\n    \"password\" : \"mycontrasena\",\r\n    \"role\": \"administrador\" , \r\n    \"name\" : \"Sergio David\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5050/api/v1/singup",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"api",
+						"v1",
+						"singup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "employee-info",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMDI2NTciLCJyb2xlIjoiZW1wbGVhZG8iLCJpYXQiOjE3MjUzMTgyNjEsImV4cCI6MTcyNTMyMTg2MX0.0qwc6VFHMWAngN2_qCuQ3H6Oh-Zrq7Q9Hq4VqSZol2A",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5050/api/v1/employee/info",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "employee-update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4MjEzMDIiLCJyb2xlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTcyNTI5MTQzNSwiZXhwIjoxNzI1Mjk1MDM1fQ.95Q-yJUImhMmSBpnEooVgexEjNhOa86KGfdDawhwKLk"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"document\": \"1022437030\",\n    \"salary\": \"4500000\",\n    \"description\": \"full stack developer\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5050/api/v1/employee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"api",
+						"v1",
+						"employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-employee",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNzU2NjAiLCJyb2xlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTcyNTMzODIzNSwiZXhwIjoxNzI1MzQxODM1fQ.ihpXqINGH_GAVT30nusukp7qhzctyLPQfnb0ryNXLtg"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\" : \"275660\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5050/api/v1/admin/employee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "employees-list",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNzU2NjAiLCJyb2xlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTcyNTMzODIzNSwiZXhwIjoxNzI1MzQxODM1fQ.ihpXqINGH_GAVT30nusukp7qhzctyLPQfnb0ryNXLtg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5050/api/v1/admin/employees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin-createuser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4MjEzMDIiLCJyb2xlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTcyNTI5NTEzMCwiZXhwIjoxNzI1Mjk4NzMwfQ.fc-_s8r6qYzscA-Tw0nnZ_-yp_1SRdCo0s2GOioaFCw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"document\":\"102243711\",\r\n    \"password\" : \"provisional\",\r\n    \"role\": \"empleado\" , \r\n    \"name\" : \"Ana\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5050/api/v1/admin/createuser",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"createuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"document\":\"1022437030\",\r\n    \"password\" : \"mycontrasena\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5050/api/v1/login",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"api",
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
